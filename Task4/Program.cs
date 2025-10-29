@@ -1,19 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using Task4.Core.Abstractions;
 using Task4.Core.Services;
+using Task4.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IAuthorService, AuthorService>();
-builder.Services.AddSingleton<IBookService, BookService>();
+
+builder.Services.AddDbContext<LibraryContext>(options =>
+    options.UseSqlite("Data Source=library.db"));
+
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<LibraryContext>();
+    context.Database.Migrate();
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -21,9 +30,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
 app.MapControllers();
 
 app.Run();

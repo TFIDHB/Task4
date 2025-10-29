@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Task4.Domain\Task4.Domain.csproj" />
+    <ProjectReference Include="..\Task4.Infrastructure\Task4.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Messages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

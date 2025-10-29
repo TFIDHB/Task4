@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Task4.Core\Task4.Core.csproj" />
+    <ProjectReference Include="..\Task4.Domain\Task4.Domain.csproj" />
   </ItemGroup>
 
 </Project>
