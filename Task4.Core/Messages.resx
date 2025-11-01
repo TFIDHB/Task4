@@ -123,4 +123,7 @@
   <data name="bookNotFound" xml:space="preserve">
     <value>Книга не найдена!</value>
   </data>
+  <data name="nameRequired" xml:space="preserve">
+    <value>Необходимо ввести имя автора</value>
+  </data>
 </root>

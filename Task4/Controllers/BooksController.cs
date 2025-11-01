@@ -21,61 +21,28 @@ namespace Task4.Controllers
         public async Task<ActionResult<BookDto>> Get(int id)
         {
             var book = await _bookService.GetBookByIdAsync(id);
-            return book == null ? NotFound() : Ok(book);
+            return Ok(book);
         }
 
         [HttpPost]
         public async Task<ActionResult<BookDto>> Post(CreateBookDto book)
         {
-            try
-            {
-                var createdBook = await _bookService.CreateBookAsync(book);
-                return CreatedAtAction(nameof(Get), new { id = createdBook.Id }, createdBook);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var createdBook = await _bookService.CreateBookAsync(book);
+            return CreatedAtAction(nameof(Get), new { id = createdBook.Id }, createdBook);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<BookDto>> Put(int id, CreateBookDto book)
         {
-            try
-            {
-                var updatedBook = await _bookService.UpdateBookAsync(id, book);
-                return Ok(updatedBook);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var updatedBook = await _bookService.UpdateBookAsync(id, book);
+            return Ok(updatedBook);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await _bookService.DeleteBookAsync(id);
-                return Ok();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _bookService.DeleteBookAsync(id);
+            return NoContent();
         }
 
         [HttpGet("after-year")]

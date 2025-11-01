@@ -24,7 +24,7 @@ namespace Task4.Core.Services
                 throw new ArgumentNullException(nameof(author));
 
             if (string.IsNullOrWhiteSpace(author.Name))
-                throw new ArgumentException("Необходимо ввести имя автора");
+                throw new ArgumentException(Messages.nameRequired);
 
             var newAuthor = new Author
             {

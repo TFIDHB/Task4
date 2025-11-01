@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Task4.Core.Abstractions;
 using Task4.Core.Services;
 using Task4.Infrastructure.Persistance;
+using Task4.Core.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionMiddleware();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.MapControllers();

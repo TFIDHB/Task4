@@ -77,5 +77,14 @@ namespace Task4.Core {
                 return ResourceManager.GetString("bookNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Необходимо ввести имя автора.
+        /// </summary>
+        internal static string nameRequired {
+            get {
+                return ResourceManager.GetString("nameRequired", resourceCulture);
+            }
+        }
     }
 }
